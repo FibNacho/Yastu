@@ -9,7 +9,7 @@ function Dice() {
   const diceNumGenerator = function (numDice: number) {
     const containerArr: number[] = [];
 
-    for (let i = 0; i < numDice - 1; i++) {
+    for (let i = 0; i < numDice; i++) {
       containerArr.push(Math.floor(Math.random() * 6 + 1));
     }
 

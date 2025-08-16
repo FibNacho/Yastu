@@ -1,8 +1,33 @@
+import { useState } from 'react';
+
 function Dice() {
+  //Temporary Dice Value array
+  const [diceValues, setDiceValues] = useState<number[]>([]);
+
+  //Function that takes in n and produced n random number in an array
+
+  const diceNumGenerator = function (numDice: number) {
+    const containerArr: number[] = [];
+
+    for (let i = 0; i < numDice - 1; i++) {
+      containerArr.push(Math.floor(Math.random() * 6 + 1));
+    }
+
+    setDiceValues(() => {
+      return containerArr.map((val, index) => {
+        return <span key={index}>{` ${val} `}</span>;
+      });
+    });
+  };
+
+  const handleClickNumGenerator = function () {
+    diceNumGenerator(5);
+  };
+
   return (
     <>
-      <span>1</span>
-      <span>2</span>
+      <span>{diceValues}</span>
+      <button onClick={handleClickNumGenerator}>Roll Dice</button>
     </>
   );
 }

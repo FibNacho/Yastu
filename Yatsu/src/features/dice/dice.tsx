@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 function Dice() {
   //Temporary Dice Value array
-  const [diceValues, setDiceValues] = useState<number[]>([6, 6, 6, 6, 6]);
+  const [diceValues, setDiceValues] = useState([6, 6, 6, 6, 6]);
 
   //Function that takes in n and produced n random number in an array
 

@@ -44,4 +44,9 @@ export const diceSlice = createSlice({
       state.allDiceHands[0].diceValues = action.payload.diceValues;
     },
   },
+  selectors: {
+    selectDiceValues: (diceState) => {
+      return diceState.allDiceHands[0].diceValues;
+    },
+  },
 });

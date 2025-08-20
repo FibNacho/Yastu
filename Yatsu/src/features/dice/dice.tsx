@@ -1,33 +1,21 @@
-import { useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { diceSlice } from './diceSlice';
 
 function Dice() {
-  //Temporary Dice Value array
-  const [diceValues, setDiceValues] = useState([6, 6, 6, 6, 6]);
-
-  //Function that takes in n and produced n random number in an array
-
-  const diceNumGenerator = function (numDice: number) {
-    const containerArr: number[] = [];
-
-    for (let i = 0; i < numDice; i++) {
-      containerArr.push(Math.floor(Math.random() * 6 + 1));
+  // function that gets state and stores it
+  const diceHandValues = useAppSelector(diceSlice.selectors.selectDiceValues).map(
+    (val) => {
+      return val.value;
     }
+  );
 
-    setDiceValues(() => {
-      return containerArr.map((val, index) => {
-        return <span key={index}>{` ${val} `}</span>;
-      });
-    });
-  };
-
-  const handleClickNumGenerator = function () {
-    diceNumGenerator(5);
-  };
+  // function to roll dice and then update state
+  const handleClickDiceRoll = function () {};
 
   return (
     <>
-      <span>{diceValues}</span>
-      <button onClick={handleClickNumGenerator}>Roll Dice</button>
+      <span>{diceHandValues}</span>
+      <button onClick={handleClickDiceRoll}>Roll Dice</button>
     </>
   );
 }

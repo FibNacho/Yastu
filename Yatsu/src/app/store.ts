@@ -4,7 +4,7 @@ import { diceSlice } from '../features/dice/diceSlice';
 
 export const store = configureStore({
   reducer: {
-    dice: diceSlice,
+    dice: diceSlice.reducer,
   },
 });
 

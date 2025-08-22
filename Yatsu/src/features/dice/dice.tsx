@@ -1,20 +1,43 @@
 import { useAppSelector } from '../../app/hooks';
-import { diceSlice } from './diceSlice';
+import { selectDiceValues, type DiceState } from './diceSlice';
 
 function Dice() {
-  // function that gets state and stores it
-  const diceHandValues = useAppSelector(diceSlice.selectors.selectDiceValues).map(
-    (val) => {
-      return val.value;
-    }
+
+  const diceHandValues = useAppSelector(selectDiceValues).map(
+    (die: DiceState) => die.value
   );
 
-  // function to roll dice and then update state
-  const handleClickDiceRoll = function () {};
+  // Generates random numbers for the dice and sends them back to state
+  const handleClickDiceRoll = function () {
+
+  //Generate new state objects
+
+  const newDiceValues =function(): DiceState[]{
+
+    const randomDiceValues = []
+
+    for(let i=0;i<5;i++){
+      randomDiceValues.push( Math.floor(Math.random() * 5) + 1)
+    }
+
+    return(
+      
+    )
+
+
+
+  }
+
+  const updatedDiceValues: DiceState[] = newDiceValues
+
+
+
+
+  };
 
   return (
     <>
-      <span>{diceHandValues}</span>
+      <span>{diceHandValues.join(', ')}</span>
       <button onClick={handleClickDiceRoll}>Roll Dice</button>
     </>
   );

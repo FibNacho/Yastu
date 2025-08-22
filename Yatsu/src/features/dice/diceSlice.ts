@@ -1,31 +1,24 @@
-import {
-  createSlice,
-  //   createAsyncThunk,
-  //   nanoid,
-  type PayloadAction,
-} from '@reduxjs/toolkit';
-// import { type RootState } from '../../app/store';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-export interface diceSingle {
+export interface DiceState {
   selected: 'Selected' | 'Not Selected';
   value: number;
 }
 
-export interface diceHands {
+export interface DiceHand {
   rollTotal: number;
-  diceValues: diceSingle[];
+  diceValues: DiceState[]; // Uses the renamed DiceState
 }
 
-export interface initialState {
-  allDiceHands: diceHands[];
+export interface DiceSliceState {
+  allDiceHands: DiceHand[];
 }
 
-const initialState: initialState = {
+const initialState: DiceSliceState = {
   allDiceHands: [
     {
       rollTotal: 0,
       diceValues: [
-        { selected: 'Selected', value: 6 },
         { selected: 'Selected', value: 6 },
         { selected: 'Selected', value: 6 },
         { selected: 'Selected', value: 6 },
@@ -40,8 +33,8 @@ export const diceSlice = createSlice({
   name: 'dice',
   initialState,
   reducers: {
-    rollDice: (state, action: PayloadAction<diceHands>) => {
-      state.allDiceHands[0].diceValues = action.payload.diceValues;
+    updateDiceValues: (state, action: PayloadAction<DiceState[]>) => {
+      state.allDiceHands[0].diceValues = action.payload;
     },
   },
   selectors: {
@@ -50,3 +43,9 @@ export const diceSlice = createSlice({
     },
   },
 });
+
+export const { updateDiceValues } = diceSlice.actions;
+
+export const { selectDiceValues } = diceSlice.selectors;
+
+export default diceSlice.reducer;

@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { diePayLoad } from './dice';
 
 export interface DiceState {
   selected: 'Selected' | 'Not Selected';
@@ -33,18 +34,19 @@ export const diceSlice = createSlice({
   name: 'dice',
   initialState,
   reducers: {
-    updateDiceValues: (state, action: PayloadAction<DiceState[]>) => {
-      state.allDiceHands[0].diceValues = action.payload;
+    updateSingleDieValue: (state, action: PayloadAction<diePayLoad>) => {
+      state.allDiceHands[0].diceValues[action.payload.index].value = action.payload
+        .value as number;
     },
   },
   selectors: {
     selectDiceValues: (diceState) => {
-      return diceState.allDiceHands[0].diceValues;
+      return diceState.allDiceHands[0];
     },
   },
 });
 
-export const { updateDiceValues } = diceSlice.actions;
+export const { updateSingleDieValue } = diceSlice.actions;
 
 export const { selectDiceValues } = diceSlice.selectors;
 

@@ -1,43 +1,37 @@
-import { useAppSelector } from '../../app/hooks';
-import { selectDiceValues, type DiceState } from './diceSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { selectDiceValues, updateSingleDieValue } from './diceSlice';
+import style from './diceStyle.module.css';
+
+export interface diePayLoad {
+  index: 0 | 1 | 2 | 3 | 4;
+  value: null | 1 | 2 | 3 | 4 | 5 | 6;
+}
 
 function Dice() {
+  const dispatch = useAppDispatch();
+  const diceHandValues = useAppSelector(selectDiceValues);
 
-  const diceHandValues = useAppSelector(selectDiceValues).map(
-    (die: DiceState) => die.value
-  );
-
-  // Generates random numbers for the dice and sends them back to state
   const handleClickDiceRoll = function () {
-
-  //Generate new state objects
-
-  const newDiceValues =function(): DiceState[]{
-
-    const randomDiceValues = []
-
-    for(let i=0;i<5;i++){
-      randomDiceValues.push( Math.floor(Math.random() * 5) + 1)
+    for (let i = 0; i < 5; i++) {
+      const payload: diePayLoad = {
+        index: i as diePayLoad['index'],
+        value: null,
+      };
+      payload.value = (Math.floor(Math.random() * 6) + 1) as diePayLoad['value'];
+      dispatch(updateSingleDieValue(payload));
     }
-
-    return(
-      
-    )
-
-
-
-  }
-
-  const updatedDiceValues: DiceState[] = newDiceValues
-
-
-
-
   };
 
   return (
     <>
-      <span>{diceHandValues.join(', ')}</span>
+      <span>
+        {diceHandValues.diceValues.map((die, index) => (
+          <span
+            key={index}
+            className={style.diceValues}
+          >{` ${die.value}`}</span>
+        ))}
+      </span>
       <button onClick={handleClickDiceRoll}>Roll Dice</button>
     </>
   );

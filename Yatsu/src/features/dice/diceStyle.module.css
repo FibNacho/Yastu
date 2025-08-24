@@ -1,3 +1,40 @@
-.diceValues {
-  color: green;
+.diceWrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border: 0.15rem solid white;
+  background-color: rgb(9, 111, 9);
+  padding: 0.25rem;
+}
+.dieIMG {
+  height: 3rem;
+  width: 3rem;
+  vertical-align: middle;
+}
+
+.rollButton {
+  display: inline;
+  height: 2.75rem;
+  white-space: nowrap;
+}
+
+.dieNotSelected {
+  padding: 0;
+  border: none;
+  background: none;
+  filter: brightness(80%);
+}
+
+.dieNotSelected:hover {
+  outline: 2px solid #ffffff;
+}
+
+.dieSelected {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.dieSelected:hover {
+  outline: 2px solid #ffffff;
 }
